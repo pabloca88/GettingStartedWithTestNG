@@ -1,3 +1,7 @@
+package app;
+
+import org.apache.commons.validator.routines.EmailValidator;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,6 +14,9 @@ public class UserManager {
 	}
 
 	public boolean addUser(String userEmail) {
+			if (!EmailValidator.getInstance().isValid(userEmail)){
+				throw new IllegalArgumentException("Not a valid email");
+			}
 
 
 		return userStorage.add(userEmail);

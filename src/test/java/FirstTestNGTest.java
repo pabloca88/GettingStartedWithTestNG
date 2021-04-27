@@ -1,12 +1,10 @@
+import app.UserManager;
 import baseclasses.UnitTestBaseClass;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
-
-import static org.testng.Assert.assertEquals;
 
 public class FirstTestNGTest extends UnitTestBaseClass {
 
