@@ -9,31 +9,37 @@ public class UserManager {
 
 	private Collection<String> userStorage;
 
-	public UserManager() {
+	public UserManager(){
 		userStorage = new ArrayList<>();
 	}
 
-	public boolean addUser(String userEmail) {
-			if (!EmailValidator.getInstance().isValid(userEmail)){
-				throw new IllegalArgumentException("Not a valid email");
+	public boolean addUser(String userEmail) throws DuplicateUserException {
+		if(!EmailValidator.getInstance().isValid(userEmail)){
+			throw new IllegalArgumentException("Not a valid email");
+		}
+		for(String s : userStorage){
+			if(s.equals(userEmail)){
+				throw new DuplicateUserException("User already exists");
 			}
-
-
+		}
 		return userStorage.add(userEmail);
 	}
 
-	public String getUser(String userEmail) {
-		for (String s : userStorage) {
-			if (s.equals(userEmail)){
+	public String getUser(String userEmail){
+		for(String s : userStorage){
+			if(s.equals(userEmail)){
 				return s;
 			}
 		}
 		return null;
 	}
 
-	public boolean deleteUser(final String userMail) {
-		return userStorage.removeIf(e -> e.equals(userMail));
+	public boolean deleteUser(final String userEmail){
+		return userStorage.removeIf(e -> e.equals(userEmail));
 	}
 
+	public Collection<String> getAllUsers(){
+		return userStorage;
+	}
 
 }
